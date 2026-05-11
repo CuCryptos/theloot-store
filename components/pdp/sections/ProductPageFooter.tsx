@@ -28,10 +28,12 @@ export function ProductPageFooter({ content }: Props) {
             </p>
             <form
               className="mt-6 flex max-w-md flex-col gap-3 sm:flex-row"
-              onSubmit={(e) => e.preventDefault()}
+              action="/api/newsletter"
+              method="POST"
             >
               <input
                 type="email"
+                name="email"
                 placeholder="you@email.com"
                 aria-label="Email address"
                 className="flex-1 rounded-full border border-cream/30 bg-transparent px-5 py-3 text-sm text-cream placeholder:text-cream/50 focus:border-signal focus:outline-none"
