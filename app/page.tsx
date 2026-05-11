@@ -65,7 +65,7 @@ export default async function HomePage() {
                 The trending products <em className="italic text-clayDeep">worth knowing about.</em>
               </h1>
               <p className="mt-8 max-w-md text-base leading-relaxed text-ink/80 sm:text-lg">
-                An editorial edit of the products already moving on TikTok, Amazon, and Reddit — picked, used, and presented the way the best magazines would have.
+                An independent edit of the products worth knowing about. New picks every Tuesday.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-6">
                 <Link
