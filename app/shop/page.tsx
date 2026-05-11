@@ -10,8 +10,9 @@ import type { Metadata } from 'next'
 export const revalidate = 60
 
 export const metadata: Metadata = {
-  title: 'Shop — Urban Yogi',
-  description: 'The full edit. Yoga, recovery, and mindfulness essentials, made for the city.',
+  title: 'Shop — theloot',
+  description:
+    'The full edit. Trending products picked for design, function, and price — one drop every Tuesday.',
 }
 
 export default async function ShopPage() {
@@ -23,15 +24,14 @@ export default async function ShopPage() {
       <main className="bg-cream text-ink pt-32 pb-32">
         <section className="px-6 lg:px-12">
           <div className="mx-auto max-w-[1200px]">
-            <p className="text-[11px] uppercase tracking-wide text-mist">The Edit · Vol. 01</p>
-            <h1 className="mt-4 max-w-[16ch] font-display text-4xl font-normal leading-[1.05] tracking-editorial lg:text-6xl">
-              Everything we make,<br />
-              <em className="italic text-clayDeep">for the practice ahead.</em>
+            <p className="text-[11px] uppercase tracking-wide text-mist">The Edit · Volume 01</p>
+            <h1 className="mt-4 max-w-[18ch] font-display text-4xl font-normal leading-[1.05] tracking-editorial lg:text-6xl">
+              Every product we&apos;d <em className="italic text-clayDeep">actually buy.</em>
             </h1>
             <p className="mt-8 max-w-md text-base leading-relaxed text-smoke">
               {products.length === 0
-                ? "The first drop is in production. Come back soon."
-                : `${products.length} objects, considered. Choose one — or let the practice choose for you.`}
+                ? 'The first drop ships shortly. Come back Tuesday.'
+                : `${products.length} picks, this volume. Every one screened for design, function, and price.`}
             </p>
           </div>
         </section>

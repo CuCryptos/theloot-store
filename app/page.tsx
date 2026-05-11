@@ -37,7 +37,7 @@ export default async function HomePage() {
                 href="/shop"
                 className="text-[12px] uppercase tracking-wide text-ink underline-offset-8 hover:underline lg:col-span-4 lg:justify-self-end lg:self-end"
               >
-                See what's trending →
+                See this week&apos;s edit →
               </Link>
             </div>
           </div>
@@ -48,7 +48,7 @@ export default async function HomePage() {
           <div className="mx-auto max-w-[1100px]">
             <p className="text-[11px] uppercase tracking-wide text-mist">The Edit · This Week</p>
             <h2 className="mt-4 max-w-[18ch] font-display text-4xl font-normal leading-[1.05] tracking-editorial lg:text-6xl">
-              Five things we'd buy ourselves.
+              What we&apos;d buy <em className="italic text-clayDeep">this week.</em>
             </h2>
 
             {featured.length === 0 ? (
@@ -103,6 +103,46 @@ export default async function HomePage() {
           </div>
         </Reveal>
 
+        {/* HOW IT WORKS — three short rules */}
+        <Reveal as="section" className="border-t border-ink/10 bg-paper px-6 py-24 lg:px-12 lg:py-32">
+          <div className="mx-auto max-w-[1100px]">
+            <p className="text-[11px] uppercase tracking-wide text-mist">How the edit works</p>
+            <h2 className="mt-4 max-w-[18ch] font-display text-3xl font-normal leading-[1.1] tracking-editorial lg:text-5xl">
+              Three rules, every drop.
+            </h2>
+
+            <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-3">
+              <article className="border-t border-ink/15 pt-6">
+                <span className="text-[11px] uppercase tracking-wide text-mist">01</span>
+                <h3 className="mt-3 font-display text-2xl leading-snug">Trending, then tested.</h3>
+                <p className="mt-4 text-base leading-relaxed text-smoke">
+                  We start with the same shortlists you&apos;ve seen — TikTok Shop, Amazon Movers, Reddit threads. Then we order one, use it, and only list it if it earns the spot.
+                </p>
+              </article>
+              <article className="border-t border-ink/15 pt-6">
+                <span className="text-[11px] uppercase tracking-wide text-mist">02</span>
+                <h3 className="mt-3 font-display text-2xl leading-snug">Editorial over urgency.</h3>
+                <p className="mt-4 text-base leading-relaxed text-smoke">
+                  No countdown timers. No fake reviews. Every product gets its own page — proper photography, a real write-up, and the same price you&apos;d pay anywhere else.
+                </p>
+              </article>
+              <article className="border-t border-ink/15 pt-6">
+                <span className="text-[11px] uppercase tracking-wide text-mist">03</span>
+                <h3 className="mt-3 font-display text-2xl leading-snug">One drop, every Tuesday.</h3>
+                <p className="mt-4 text-base leading-relaxed text-smoke">
+                  A short letter Tuesday morning with the week&apos;s pick. That&apos;s the only email you&apos;ll get. We don&apos;t restock everything. We don&apos;t chase trends back.
+                </p>
+              </article>
+            </div>
+            <Link
+              href="/about"
+              className="mt-16 inline-block text-[12px] uppercase tracking-wide text-ink underline-offset-8 hover:underline"
+            >
+              More on how the edit works →
+            </Link>
+          </div>
+        </Reveal>
+
         {/* MANIFESTO — single quote */}
         <Reveal as="section" className="border-y border-ink/10 px-6 py-32 lg:px-12 lg:py-48">
           <div className="mx-auto max-w-[900px] text-center">
@@ -111,7 +151,7 @@ export default async function HomePage() {
               We slow that down, just enough.
             </p>
             <p className="mt-12 text-[11px] uppercase tracking-wide text-mist">
-              The studio
+              theloot · editorial
             </p>
           </div>
         </Reveal>

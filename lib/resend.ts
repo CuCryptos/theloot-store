@@ -99,12 +99,12 @@ export async function sendOrderConfirmation(opts: {
   return send({
     from: from(),
     to: opts.to,
-    subject: `Urban Yogi · ${opts.orderName} is on its way`,
+    subject: `theloot · ${opts.orderName} is on its way`,
     html: `
       <div style="font-family:Manrope,system-ui,sans-serif;color:#1B1814;line-height:1.6;max-width:560px;margin:0 auto;padding:48px 16px;background:#F2EDE4;">
         <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8A8276;">Order ${escape(opts.orderName)}</p>
-        <h1 style="font-family:Newsreader,Georgia,serif;font-style:italic;font-size:48px;line-height:1;letter-spacing:-.02em;margin:12px 0 32px;">Thank you<br/>for the calm.</h1>
-        <p style="font-size:15px;max-width:48ch;">Your pieces are being prepared. We&apos;ll send a tracking note the moment they leave the studio.</p>
+        <h1 style="font-family:Newsreader,Georgia,serif;font-style:italic;font-size:48px;line-height:1;letter-spacing:-.02em;margin:12px 0 32px;">On its way.</h1>
+        <p style="font-size:15px;max-width:48ch;">Your order is being prepared. We&apos;ll send a tracking note the moment it leaves our fulfilment partner.</p>
         <table style="width:100%;border-collapse:collapse;margin-top:32px;">${rows}
           <tr>
             <td style="padding:18px 0 0;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#8A8276;">Total</td>
@@ -112,7 +112,7 @@ export async function sendOrderConfirmation(opts: {
             <td style="padding:18px 0 0;font-family:Newsreader,Georgia,serif;font-style:italic;font-size:22px;text-align:right;">${escape(opts.total)}</td>
           </tr>
         </table>
-        <p style="margin-top:48px;font-family:Newsreader,Georgia,serif;font-style:italic;font-size:18px;color:#3A332C;">— the Urban Yogi studio</p>
+        <p style="margin-top:48px;font-family:Newsreader,Georgia,serif;font-style:italic;font-size:18px;color:#3A332C;">— theloot · editorial</p>
       </div>
     `,
   })

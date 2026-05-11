@@ -14,7 +14,7 @@ export function PdpComparison({
         <div className="mt-14 border-t border-ink/15">
           <div className="grid grid-cols-3 border-b border-ink/15 py-4 text-[11px] uppercase tracking-wide text-mist">
             <span>Feature</span>
-            <span className="text-ink">Urban Yogi</span>
+            <span className="text-ink">theloot</span>
             <span>Typical</span>
           </div>
           {rows.map((r) => (

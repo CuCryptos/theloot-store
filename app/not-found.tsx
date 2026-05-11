@@ -10,17 +10,17 @@ export default function NotFound() {
         <div className="mx-auto max-w-[680px] px-6 text-center">
           <p className="text-[11px] uppercase tracking-wide text-mist">404 · Not found</p>
           <h1 className="mt-6 font-display text-5xl italic font-normal leading-[1.05] tracking-editorial lg:text-7xl">
-            Quiet here.
+            Nothing here this week.
           </h1>
-          <p className="mt-8 max-w-[44ch] mx-auto text-base leading-relaxed text-smoke lg:text-lg">
-            The page you were looking for has either moved, is being remade, or never quite existed. Either way, breathe.
+          <p className="mt-8 max-w-[48ch] mx-auto text-base leading-relaxed text-smoke lg:text-lg">
+            The page either moved, sold out, or never quite existed. The current edit lives in the shop, and the next drop ships Tuesday.
           </p>
           <div className="mt-12 flex justify-center gap-6 text-[12px]">
             <Link href="/" className="underline-offset-8 hover:underline">Return home</Link>
             <span className="text-mist">·</span>
             <Link href="/shop" className="underline-offset-8 hover:underline">The shop</Link>
             <span className="text-mist">·</span>
-            <Link href="/journal" className="underline-offset-8 hover:underline">The journal</Link>
+            <Link href="/about" className="underline-offset-8 hover:underline">About</Link>
           </div>
         </div>
       </main>

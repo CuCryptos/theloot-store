@@ -5,12 +5,12 @@ export const SITE = {
   social: {
     instagram: 'theloot.co',
   },
+  cadence: 'One drop, every Tuesday.',
 }
 
 export const NAV = [
-  { label: 'Now',      href: '/shop' },
-  { label: 'Journal',  href: '/journal' },
-  { label: 'About',    href: '/about' },
+  { label: 'Shop',  href: '/shop' },
+  { label: 'About', href: '/about' },
 ]
 
 export const FREE_SHIP_THRESHOLD = 75 // USD

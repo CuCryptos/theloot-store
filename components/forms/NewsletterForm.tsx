@@ -24,7 +24,7 @@ export function NewsletterForm({
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? 'Something went wrong')
       setStatus('ok')
-      setMessage('Quietly added. Look for the first letter at the change of season.')
+      setMessage('On the list. The next drop ships Tuesday.')
       setEmail('')
     } catch (err) {
       setStatus('error')
