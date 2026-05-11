@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Urban Yogi — Headless Shopify Handoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --cream:#F2EDE4; --bone:#E8E1D3; --ink:#1B1814; --smoke:#3A332C;
+    --mist:#8A8276; --sage:#8A9A7B; --sageDeep:#5C6B53;
+    --terra:#B86A4C; --gold:#B69464; --rose:#C49A93;
+    --display:'Newsreader',Georgia,serif; --body:'Manrope',system-ui,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{background:var(--cream);color:var(--ink);font-family:var(--body);font-weight:400;}
+  body{padding:80px 48px 120px;max-width:1400px;margin:0 auto;}
+  .mono{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);}
+  .display{font-family:var(--display);letter-spacing:-.03em;}
+  h1{font-family:var(--display);font-style:italic;font-size:96px;line-height:.92;letter-spacing:-.03em;margin-top:18px;}
+  h2{font-family:var(--display);font-style:italic;font-size:44px;letter-spacing:-.03em;line-height:1;margin:0 0 24px;}
+  h3{font-family:var(--display);font-size:22px;line-height:1.25;margin-bottom:8px;}
+  p{font-family:var(--body);font-size:14px;line-height:1.6;color:var(--smoke);max-width:64ch;}
+  hr{border:none;border-top:1px solid rgba(27,24,20,.12);margin:64px 0;}
+  section{margin-top:64px;}
+
+  .sub{font-family:var(--display);font-style:italic;font-size:22px;color:var(--smoke);max-width:60ch;margin-top:16px;}
+  .grid{display:grid;gap:24px;}
+  .cols-2{grid-template-columns:1fr 1fr;}
+  .cols-3{grid-template-columns:repeat(3,1fr);}
+  .cols-4{grid-template-columns:repeat(4,1fr);}
+  .cols-5{grid-template-columns:repeat(5,1fr);}
+
+  .swatch{aspect-ratio:1/1;display:flex;align-items:flex-end;padding:14px;color:var(--cream);font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;}
+  .swatch.dark{color:var(--ink);}
+  .swatch span{display:block;}
+  .swatch small{display:block;opacity:.7;font-size:9px;}
+
+  .card{border-top:1px solid rgba(27,24,20,.15);padding:18px 0;}
+  .file{display:flex;justify-content:space-between;gap:16px;padding:8px 0;border-bottom:1px dashed rgba(27,24,20,.1);font-family:var(--mono);font-size:11px;color:var(--ink);}
+  .file .desc{color:var(--mist);text-transform:none;letter-spacing:0;font-family:var(--body);font-size:12px;text-align:right;}
+
+  .logo-tile{aspect-ratio:4/3;background:var(--cream);border:1px solid rgba(27,24,20,.12);display:flex;align-items:center;justify-content:center;}
+  .logo-tile.dark{background:var(--ink);color:var(--cream);}
+
+  .pill{display:inline-flex;gap:8px;align-items:center;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;padding:6px 10px;box-shadow:inset 0 0 0 1px currentColor;color:var(--ink);}
+  .stack{display:flex;flex-direction:column;gap:6px;}
+  .row{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+
+  /* Page preview cards */
+  .preview{border:1px solid rgba(27,24,20,.12);background:#fff;aspect-ratio:4/3;position:relative;overflow:hidden;}
+  .preview .label{position:absolute;left:12px;top:12px;}
+  .preview .url{position:absolute;right:12px;top:12px;background:var(--ink);color:var(--cream);padding:4px 8px;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;}
+
+  /* Mini hero stripe */
+  .stripe-dark{background:repeating-linear-gradient(135deg,#3A332C 0 14px,#2c2722 14px 28px);}
+  .stripe-bone{background:repeating-linear-gradient(135deg,#D8CFBF 0 16px,#cdc3b0 16px 32px);}
+
+  pre.code{background:var(--ink);color:var(--cream);font-family:var(--mono);font-size:11px;line-height:1.7;padding:24px;overflow-x:auto;letter-spacing:0;text-transform:none;}
+
+  table{width:100%;border-collapse:collapse;margin-top:24px;}
+  td,th{padding:14px 0;border-bottom:1px solid rgba(27,24,20,.1);text-align:left;font-size:13px;vertical-align:top;}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);font-weight:400;}
+  td.us{font-family:var(--display);font-size:16px;color:var(--ink);}
+  td.feat{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="row">
+  <div>
+    <p class="mono">Developer handoff · No. 001</p>
+    <h1>Urban Yogi.<br/>Headless,<br/>quietly.</h1>
+    <p class="sub">A sibling to <em>posted-hawaii</em>: same Next.js 16 + Tailwind 4 chassis, a different brand and a different cart. Shopify Storefront API for cart, Shopify-hosted checkout, Printify and CJ Dropshipping for fulfillment.</p>
+  </div>
+  <div class="stack" style="text-align:right">
+    <span class="pill" style="color:var(--sageDeep)">Next 16 · React 19</span>
+    <span class="pill" style="color:var(--terraDeep,#8E4F36)">Tailwind v4</span>
+    <span class="pill" style="color:var(--gold)">Storefront API</span>
+  </div>
+</div>
+
+<hr/>
+
+<!-- BRAND STRIP -->
+<section>
+  <p class="mono">01 · Brand identity</p>
+  <h2>Mindful living, designed.</h2>
+
+  <div class="grid cols-5" style="margin-top:24px">
+    <div class="swatch" style="background:#F2EDE4;color:var(--ink)"><span>Cream<small>#F2EDE4</small></span></div>
+    <div class="swatch dark" style="background:#E8E1D3"><span>Bone<small>#E8E1D3</small></span></div>
+    <div class="swatch" style="background:#1B1814"><span>Ink<small>#1B1814</small></span></div>
+    <div class="swatch" style="background:#3A332C"><span>Smoke<small>#3A332C</small></span></div>
+    <div class="swatch" style="background:#8A8276"><span>Mist<small>#8A8276</small></span></div>
+  </div>
+  <div class="grid cols-5" style="margin-top:24px">
+    <div class="swatch" style="background:#8A9A7B"><span>Sage<small>#8A9A7B</small></span></div>
+    <div class="swatch" style="background:#5C6B53"><span>Sage Deep<small>#5C6B53</small></span></div>
+    <div class="swatch" style="background:#B86A4C"><span>Terracotta<small>#B86A4C</small></span></div>
+    <div class="swatch" style="background:#B69464"><span>Gold<small>#B69464</small></span></div>
+    <div class="swatch" style="background:#C49A93;color:var(--ink)"><span>Dusty Rose<small>#C49A93</small></span></div>
+  </div>
+
+  <!-- Type pairing -->
+  <div class="grid cols-3" style="margin-top:48px">
+    <div>
+      <p class="mono">Display · Newsreader</p>
+      <p class="display" style="font-style:italic;font-size:80px;line-height:.95;margin-top:12px;color:var(--ink)">Aa</p>
+      <p class="mono" style="margin-top:12px">400 / 500 · Italic</p>
+    </div>
+    <div>
+      <p class="mono">Body · Manrope</p>
+      <p style="font-family:var(--body);font-size:80px;line-height:.95;margin-top:12px;font-weight:400">Aa</p>
+      <p class="mono" style="margin-top:12px">300 / 400 / 500 / 600</p>
+    </div>
+    <div>
+      <p class="mono">Labels · JetBrains Mono</p>
+      <p style="font-family:var(--mono);font-size:64px;line-height:.95;margin-top:18px">Aa</p>
+      <p class="mono" style="margin-top:12px">400 / 500</p>
+    </div>
+  </div>
+
+  <!-- Logo directions -->
+  <div class="grid cols-4" style="margin-top:48px">
+    <div class="logo-tile">
+      <span class="display" style="font-style:italic;font-size:36px">urban yogi</span>
+    </div>
+    <div class="logo-tile" style="flex-direction:column;gap:4px">
+      <span class="display" style="font-style:italic;font-size:30px">urban</span>
+      <span class="display" style="font-style:italic;font-size:30px;color:var(--terra)">yogi</span>
+    </div>
+    <div class="logo-tile dark">
+      <span class="display" style="font-style:italic;font-size:36px">urban yogi</span>
+    </div>
+    <div class="logo-tile" style="flex-direction:column">
+      <span class="display" style="font-size:48px;letter-spacing:-.05em">UY</span>
+      <span class="mono" style="margin-top:6px">Est. 26</span>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ROUTES -->
+<section>
+  <p class="mono">02 · Routes & previews</p>
+  <h2>Six surfaces, one chassis.</h2>
+
+  <div class="grid cols-3" style="margin-top:32px">
+    <div>
+      <div class="preview stripe-dark">
+        <span class="mono label" style="color:rgba(242,237,228,.7)">No. 001</span>
+        <span class="url">/</span>
+      </div>
+      <p class="mono" style="margin-top:12px">Homepage</p>
+      <p style="margin-top:6px">Cinematic hero, marquee, asymmetric edit grid, black quote panel, journal trio.</p>
+    </div>
+    <div>
+      <div class="preview stripe-bone">
+        <span class="mono label">01 / 06</span>
+        <span class="url">/shop/[slug]</span>
+      </div>
+      <p class="mono" style="margin-top:12px">PDP — conversion surface</p>
+      <p style="margin-top:6px">Sticky buy box, ritual guide, materials, comparison, all driven by Shopify metaobjects.</p>
+    </div>
+    <div>
+      <div class="preview stripe-bone">
+        <span class="mono label">Collection</span>
+        <span class="url">/collections/[handle]</span>
+      </div>
+      <p class="mono" style="margin-top:12px">Collection</p>
+      <p style="margin-top:6px">Editorial hero, sticky filter rail, 3-up product grid with reveal stagger.</p>
+    </div>
+    <div>
+      <div class="preview" style="background:var(--ink);color:var(--cream);display:flex;align-items:center;justify-content:flex-end;padding:24px">
+        <div style="width:60%;background:var(--cream);height:100%"></div>
+        <span class="mono label" style="color:rgba(242,237,228,.7)">Bag · 02</span>
+        <span class="url">drawer</span>
+      </div>
+      <p class="mono" style="margin-top:12px">Cart drawer</p>
+      <p style="margin-top:6px">Right-sliding panel, free-ship meter, qty steppers, hand-off to Shopify checkout URL.</p>
+    </div>
+    <div>
+      <div class="preview stripe-bone">
+        <span class="mono label">Vol. 01</span>
+        <span class="url">/about</span>
+      </div>
+      <p class="mono" style="margin-top:12px">About / founder</p>
+      <p style="margin-top:6px">Oversize editorial title, founder portrait + letter, gold stat row on charcoal.</p>
+    </div>
+    <div>
+      <div class="preview stripe-bone">
+        <span class="mono label">Journal</span>
+        <span class="url">/journal/[slug]</span>
+      </div>
+      <p class="mono" style="margin-top:12px">Journal post</p>
+      <p style="margin-top:6px">Drop cap, terracotta-bordered pull quote, MDX content via next-mdx-remote.</p>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- FILE TREE -->
+<section>
+  <p class="mono">03 · What was written</p>
+  <h2>The file tree.</h2>
+
+  <div class="grid cols-2" style="margin-top:24px">
+    <div>
+      <p class="mono" style="margin-bottom:12px">App routes</p>
+      <div class="file"><span>app/page.tsx</span><span class="desc">Homepage</span></div>
+      <div class="file"><span>app/layout.tsx</span><span class="desc">CartProvider wrapper</span></div>
+      <div class="file"><span>app/globals.css</span><span class="desc">Tailwind v4 + reveal/marquee/drawer</span></div>
+      <div class="file"><span>app/fonts.ts</span><span class="desc">Newsreader · Manrope · JetBrains Mono</span></div>
+      <div class="file"><span>app/api/cart/route.ts</span><span class="desc">Storefront Cart API proxy</span></div>
+      <div class="file"><span>app/shop/[slug]/page.tsx</span><span class="desc">PDP</span></div>
+      <div class="file"><span>app/collections/[handle]/page.tsx</span><span class="desc">Collection</span></div>
+      <div class="file"><span>app/about/page.tsx</span><span class="desc">Founder</span></div>
+      <div class="file"><span>app/journal/page.tsx</span><span class="desc">Journal index</span></div>
+      <div class="file"><span>app/journal/[slug]/page.tsx</span><span class="desc">Journal post template</span></div>
+    </div>
+    <div>
+      <p class="mono" style="margin-bottom:12px">Components & lib</p>
+      <div class="file"><span>components/cart/CartProvider.tsx</span><span class="desc">localStorage cart id</span></div>
+      <div class="file"><span>components/cart/CartDrawer.tsx</span><span class="desc">right-sliding drawer</span></div>
+      <div class="file"><span>components/layout/Navbar.tsx</span><span class="desc">transparent over cinema</span></div>
+      <div class="file"><span>components/layout/Footer.tsx</span><span class="desc">88px italic block</span></div>
+      <div class="file"><span>components/pdp/PdpGallery.tsx</span><span class="desc">main + thumbs</span></div>
+      <div class="file"><span>components/pdp/PdpBuyBox.tsx</span><span class="desc">sticky on desktop</span></div>
+      <div class="file"><span>components/pdp/PdpRitual.tsx</span><span class="desc">No. 01 / 02 / 03</span></div>
+      <div class="file"><span>components/pdp/PdpMaterials.tsx</span><span class="desc">black-bg cards</span></div>
+      <div class="file"><span>components/pdp/PdpComparison.tsx</span><span class="desc">honest table</span></div>
+      <div class="file"><span>components/ui/Reveal.tsx</span><span class="desc">IntersectionObserver</span></div>
+      <div class="file"><span>lib/shopify.ts</span><span class="desc">Storefront API + Cart mutations</span></div>
+      <div class="file"><span>lib/shopify-types.ts</span><span class="desc">Product · Cart · Metafields</span></div>
+      <div class="file"><span>lib/constants.ts</span><span class="desc">NAV · FREE_SHIP_THRESHOLD</span></div>
+      <div class="file"><span>tailwind.config.ts</span><span class="desc">earth-tone tokens</span></div>
+      <div class="file"><span>package.json</span><span class="desc">mirrors posted-hawaii</span></div>
+      <div class="file"><span>README.md</span><span class="desc">setup + metaobject schema</span></div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- METAOBJECTS -->
+<section>
+  <p class="mono">04 · Shopify metaobjects</p>
+  <h2>Editor-managed transparency.</h2>
+  <p class="sub">The PDP&apos;s ritual, materials, and comparison surfaces are not hard-coded. They&apos;re driven by Shopify metaobjects so the content team can update without a deploy.</p>
+
+  <table>
+    <thead><tr><th>Namespace</th><th>Key</th><th>Type</th><th>Shape</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="feat">uy</td>
+        <td class="us">ritual_steps</td>
+        <td class="feat">JSON</td>
+        <td><code style="font-family:var(--mono);font-size:11px">[{ index, title, body }]</code></td>
+      </tr>
+      <tr>
+        <td class="feat">uy</td>
+        <td class="us">materials</td>
+        <td class="feat">JSON</td>
+        <td><code style="font-family:var(--mono);font-size:11px">[{ label, body, certification? }]</code></td>
+      </tr>
+      <tr>
+        <td class="feat">uy</td>
+        <td class="us">comparison</td>
+        <td class="feat">JSON</td>
+        <td><code style="font-family:var(--mono);font-size:11px">[{ feature, us, typical }]</code></td>
+      </tr>
+      <tr>
+        <td class="feat">uy</td>
+        <td class="us">review_summary</td>
+        <td class="feat">JSON</td>
+        <td><code style="font-family:var(--mono);font-size:11px">{ rating, count }</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<hr/>
+
+<!-- CART FLOW -->
+<section>
+  <p class="mono">05 · Cart flow</p>
+  <h2>Storefront API only. Shopify owns money.</h2>
+  <pre class="code">// On first add:
+useCart().add(variantId)
+   ↓ POST /api/cart  { action:'add', cartId:null, variantId }
+      ↓ shopifyFetch  cartCreate → cartLinesAdd
+         ↓ returns { cart }
+   ↓ persists cart.id to localStorage as 'uy_cart_id'
+   ↓ opens &lt;CartDrawer&gt;
+
+// On checkout:
+&lt;a href={cart.checkoutUrl}&gt;Checkout · Shopify&lt;/a&gt;
+   ↓ Shopify-hosted checkout — fulfillment routes to Printify or CJ
+     based on the variant&apos;s connected app.</pre>
+</section>
+
+<hr/>
+
+<!-- ENV / NEXT STEPS -->
+<section>
+  <p class="mono">06 · To-wire</p>
+  <h2>What needs your touch.</h2>
+
+  <div class="grid cols-2" style="margin-top:24px">
+    <div>
+      <h3>Environment</h3>
+      <pre class="code">NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=
+NEXT_PUBLIC_SITE_URL=https://urbanyogi.co
+
+SHOPIFY_WEBHOOK_SECRET=
+KLAVIYO_PRIVATE_KEY=
+KLAVIYO_NEWSLETTER_LIST_ID=
+RESEND_API_KEY=
+RESEND_FROM=
+RESEND_STUDIO_INBOX=</pre>
+    </div>
+    <div>
+      <h3>Final touches</h3>
+      <div class="card"><p class="mono">·</p><p>Real lifestyle photography to replace striped placeholders on hero, edit grid, journal</p></div>
+      <div class="card"><p class="mono">·</p><p>Logo files (4 directions shown above) into <code>brand/logos/</code></p></div>
+      <div class="card"><p class="mono">·</p><p>Add the Shopify webhook (orders/create → <code>/api/orders</code>) and paste the revealed secret into <code>SHOPIFY_WEBHOOK_SECRET</code></p></div>
+      <div class="card"><p class="mono">·</p><p>Create the Klaviyo "Requested Back In Stock" metric + flow for the PDP notify-me</p></div>
+    </div>
+  </div>
+</section>
+
+<hr/>
+
+<!-- ENDPOINTS -->
+<section>
+  <p class="mono">07 · Server endpoints</p>
+  <h2>Five routes, three services.</h2>
+
+  <table>
+    <thead><tr><th>Route</th><th>Purpose</th><th>Service</th></tr></thead>
+    <tbody>
+      <tr><td class="us">POST /api/cart</td><td>Storefront Cart API proxy</td><td class="feat">Shopify</td></tr>
+      <tr><td class="us">POST /api/newsletter</td><td>Footer + About email capture</td><td class="feat">Klaviyo</td></tr>
+      <tr><td class="us">POST /api/back-in-stock</td><td>PDP notify-me (sold-out variants)</td><td class="feat">Klaviyo</td></tr>
+      <tr><td class="us">POST /api/contact</td><td>/contact form → studio inbox</td><td class="feat">Resend</td></tr>
+      <tr><td class="us">POST /api/orders</td><td>Shopify webhook → branded order email</td><td class="feat">Resend</td></tr>
+    </tbody>
+  </table>
+
+<hr/>
+
+<p class="mono" style="margin-top:48px">End of handoff · v1 · {{date}}</p>
+
+<script>document.body.innerHTML = document.body.innerHTML.replace('{{date}}', new Date().toISOString().slice(0,10));</script>
+
+</body>
+</html>

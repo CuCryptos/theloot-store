@@ -1,0 +1,47 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+@theme {
+  --animate-uy-pulse: uy-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes uy-pulse {
+  0%, 100% { opacity: 0.55; transform: translateX(-15%); }
+  50%      { opacity: 1;    transform: translateX(15%); }
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-ink font-body antialiased;
+    font-feature-settings: "ss01";
+  }
+  ::selection {
+    background: #9C8869;
+    color: #F5F1EB;
+  }
+}
+
+@layer utilities {
+  .hairline { box-shadow: inset 0 0 0 1px currentColor; }
+  .vertical-label { writing-mode: vertical-rl; transform: rotate(180deg); }
+}
+
+/* Quiet reveal — slower, less travel */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.4s cubic-bezier(.2,.6,.2,1), transform 1.4s cubic-bezier(.2,.6,.2,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Cart drawer */
+.drawer-panel {
+  transform: translateX(100%);
+  transition: transform 480ms cubic-bezier(.2,.6,.2,1);
+}
+.drawer-panel.open { transform: translateX(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .drawer-panel { transition: none; }
+}

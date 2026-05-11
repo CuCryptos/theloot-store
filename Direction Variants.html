@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Urban Yogi — A / B / C Direction Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html,body{margin:0;padding:0;background:#1a1815;color:#fff;font-family:'JetBrains Mono',monospace;}
+  * { box-sizing: border-box; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" data-presets="react">
+const DCRootC = window.DesignCanvas, DCSectionC = window.DCSection, DCArtboardC = window.DCArtboard;
+
+/* ------------- Shared helpers ------------- */
+const stripeDark = { backgroundImage: 'linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.55) 100%), repeating-linear-gradient(135deg,#3A332C 0 14px,#2c2722 14px 28px)' };
+const stripeWarm = { backgroundImage: 'linear-gradient(180deg,rgba(0,0,0,.05) 0%,rgba(0,0,0,.30) 100%), repeating-linear-gradient(135deg,#bea98a 0 14px,#b59f7e 14px 28px)' };
+const stripeBone = { backgroundImage: 'repeating-linear-gradient(135deg,#D8CFBF 0 18px,#cdc3b0 18px 36px)' };
+const stripeIvory = { backgroundImage: 'repeating-linear-gradient(135deg,#ECE6DA 0 18px,#e2dccc 18px 36px)' };
+const stripeOchre = { backgroundImage: 'repeating-linear-gradient(135deg,#d6b48a 0 18px,#caa478 18px 36px)' };
+
+const Grain = () => <div style={{position:'absolute',inset:0,opacity:.06,pointerEvents:'none',mixBlendMode:'overlay',backgroundImage:`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>")`}}/>;
+
+/* ============ VARIANT A — Cinematic Editorial (current direction) ============ */
+const A = {
+  bg:'#F2EDE4', bone:'#E8E1D3', ink:'#1B1814', smoke:'#3A332C', mist:'#8A8276',
+  display:`'Newsreader',serif`, body:`'Manrope',sans-serif`, mono:`'JetBrains Mono',monospace`,
+  accent:'#B86A4C',
+};
+const VariantAHero = () => (
+  <div style={{position:'relative',width:'100%',height:880,overflow:'hidden',background:'#1B1814'}}>
+    <div style={{position:'absolute',inset:0,...stripeDark}}/>
+    <Grain/>
+    <div style={{position:'absolute',inset:0,padding:'40px 36px',display:'flex',flexDirection:'column',justifyContent:'space-between',color:'#F2EDE4'}}>
+      <div style={{display:'flex',justifyContent:'space-between',fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',opacity:.75}}>
+        <span>shop · rituals · journal · about</span>
+        <span style={{fontFamily:A.display,fontStyle:'italic',fontSize:22,letterSpacing:'-.03em',opacity:1}}>urban yogi</span>
+        <span>bag</span>
+      </div>
+      <div>
+        <p style={{fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',opacity:.7}}>No. 001 / Spring Volume</p>
+        <h1 style={{fontFamily:A.display,fontStyle:'italic',fontSize:140,lineHeight:.88,letterSpacing:'-.03em',margin:'18px 0 0',fontWeight:400}}>
+          Begin again,<br/>slowly.
+        </h1>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginTop:48}}>
+          <p style={{fontFamily:A.display,fontStyle:'italic',fontSize:18,opacity:.85,maxWidth:300,margin:0}}>Yoga, recovery, and small rituals for an unhurried life.</p>
+          <span style={{fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase'}}>Enter the studio →</span>
+        </div>
+      </div>
+    </div>
+    <div style={{position:'absolute',right:14,top:'50%',transform:'translateY(-50%) rotate(180deg)',writingMode:'vertical-rl',fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:'rgba(242,237,228,.55)'}}>Urban Yogi · Vol I</div>
+  </div>
+);
+const VariantATiles = () => (
+  <div style={{padding:'56px 36px',background:A.bg}}>
+    <p style={{fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:A.mist,margin:0}}>Vol. 01 — The Edit</p>
+    <h2 style={{fontFamily:A.display,fontStyle:'italic',fontSize:46,lineHeight:.95,letterSpacing:'-.03em',margin:'10px 0 36px',color:A.ink,fontWeight:400}}>Six objects to slow a Sunday.</h2>
+    <div style={{display:'grid',gridTemplateColumns:'1.2fr 1fr',gap:14}}>
+      {['01·The Cork Mat','02·Sleep Tonic','03·Cedar Diffuser','04·Linen Bolster'].map((l,i)=>(
+        <div key={i} style={{position:'relative',aspectRatio:'4/5',background:A.bone,...stripeBone,gridRow:i===0?'span 2':undefined}}>
+          <Grain/>
+          <div style={{position:'absolute',inset:'auto 12px 12px 12px',display:'flex',justifyContent:'space-between',alignItems:'flex-end',color:'#fff'}}>
+            <span style={{fontFamily:A.mono,fontSize:9,letterSpacing:'.18em',textTransform:'uppercase'}}>No. {l.split('·')[0]}</span>
+            <span style={{fontFamily:A.display,fontStyle:'italic',fontSize:16}}>{l.split('·')[1]}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+const VariantAPdp = () => (
+  <div style={{display:'grid',gridTemplateColumns:'1.1fr 1fr',background:A.bg,minHeight:780}}>
+    <div style={{position:'relative',background:A.bone,...stripeBone}}>
+      <Grain/>
+      <span style={{position:'absolute',top:14,left:14,fontFamily:A.mono,fontSize:9,letterSpacing:'.18em',textTransform:'uppercase',color:'#fff'}}>01 / 06</span>
+    </div>
+    <div style={{padding:'40px 32px',color:A.ink}}>
+      <p style={{fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:A.mist,margin:0}}>Mat</p>
+      <h1 style={{fontFamily:A.display,fontStyle:'italic',fontSize:54,lineHeight:1.02,letterSpacing:'-.03em',margin:'14px 0 0',fontWeight:400}}>The Cork Mat</h1>
+      <p style={{fontFamily:A.mono,fontSize:13,margin:'18px 0 0'}}>$148</p>
+      <p style={{fontFamily:A.display,fontStyle:'italic',fontSize:17,lineHeight:1.55,color:A.smoke,margin:'24px 0 0',maxWidth:360}}>Portuguese cork harvested without felling a tree. A mat that smells like the forest it came from.</p>
+      <div style={{marginTop:32}}>
+        <p style={{fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',color:A.mist,margin:0}}>Length</p>
+        <div style={{display:'flex',gap:8,marginTop:10}}>
+          {['68"','72"','78"'].map((s,i)=>(
+            <span key={i} style={{padding:'8px 14px',fontFamily:A.mono,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',background:i===1?A.ink:'transparent',color:i===1?A.bg:A.ink,boxShadow:i!==1?`inset 0 0 0 1px ${A.ink}`:undefined}}>{s}</span>
+          ))}
+        </div>
+      </div>
+      <button style={{display:'block',width:'100%',padding:'18px 0',marginTop:36,background:A.ink,color:A.bg,fontFamily:A.mono,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',border:'none',cursor:'pointer'}}>Add to bag</button>
+    </div>
+  </div>
+);
+
+/* ============ VARIANT B — Aesop / Quiet ============ */
+const B = {
+  bg:'#F5F1EB', bone:'#EFE9DD', ink:'#1F1C18', smoke:'#4A453E', mist:'#A39C8E',
+  display:`'Fraunces',serif`, body:`'Inter',sans-serif`,
+};
+const VariantBHero = () => (
+  <div style={{position:'relative',width:'100%',height:880,overflow:'hidden',background:B.bg}}>
+    <div style={{position:'absolute',inset:0,padding:'40px 36px',display:'flex',flexDirection:'column',justifyContent:'space-between',color:B.ink}}>
+      <div style={{display:'flex',justifyContent:'space-between',fontFamily:B.body,fontSize:11,letterSpacing:'.04em',color:B.smoke}}>
+        <span>Shop</span><span>Rituals</span><span>Journal</span><span>About</span>
+        <span style={{fontFamily:B.display,fontStyle:'italic',fontSize:18,letterSpacing:'-.02em'}}>urban yogi</span>
+        <span>Bag</span>
+      </div>
+      <div style={{textAlign:'left',maxWidth:'70%'}}>
+        <h1 style={{fontFamily:B.display,fontWeight:400,fontSize:84,lineHeight:1.02,letterSpacing:'-.025em',margin:0,color:B.ink}}>
+          Practice<br/>without performance.
+        </h1>
+        <p style={{fontFamily:B.body,fontSize:14,lineHeight:1.7,color:B.smoke,maxWidth:360,marginTop:36,fontWeight:400}}>
+          Urban Yogi makes a small number of considered objects for daily practice — yoga, recovery, sleep, stillness. Made-to-order in limited volumes.
+        </p>
+        <p style={{fontFamily:B.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:B.ink,marginTop:48,borderBottom:`1px solid ${B.ink}`,display:'inline-block',paddingBottom:6}}>Browse the shop</p>
+      </div>
+    </div>
+  </div>
+);
+const VariantBTiles = () => (
+  <div style={{padding:'80px 48px',background:B.bg}}>
+    <p style={{fontFamily:B.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:B.mist,margin:0}}>Edit · 01</p>
+    <h2 style={{fontFamily:B.display,fontWeight:400,fontSize:38,lineHeight:1.08,letterSpacing:'-.02em',margin:'20px 0 56px',color:B.ink,maxWidth:500}}>A short list, made for the hour the world goes still.</h2>
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:48,rowGap:64}}>
+      {[
+        {n:'01',t:'The Cork Mat',p:'$148'},
+        {n:'02',t:'Sleep Tonic',p:'$42'},
+        {n:'03',t:'Cedar Diffuser',p:'$78'},
+        {n:'04',t:'Linen Bolster',p:'$96'},
+      ].map((p,i)=>(
+        <div key={i}>
+          <div style={{position:'relative',aspectRatio:'4/5',background:B.bone,...stripeIvory}}/>
+          <p style={{fontFamily:B.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:B.mist,margin:'18px 0 0'}}>No. {p.n}</p>
+          <div style={{display:'flex',justifyContent:'space-between',alignItems:'baseline',marginTop:8}}>
+            <h3 style={{fontFamily:B.display,fontWeight:400,fontSize:22,letterSpacing:'-.01em',margin:0}}>{p.t}</h3>
+            <span style={{fontFamily:B.body,fontSize:13,color:B.smoke}}>{p.p}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+const VariantBPdp = () => (
+  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',background:B.bg,minHeight:780}}>
+    <div style={{background:B.bone,...stripeIvory}}/>
+    <div style={{padding:'72px 48px',color:B.ink}}>
+      <p style={{fontFamily:B.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:B.mist,margin:0}}>Object · Mat</p>
+      <h1 style={{fontFamily:B.display,fontWeight:400,fontSize:42,lineHeight:1.05,letterSpacing:'-.02em',margin:'20px 0 0'}}>The Cork Mat</h1>
+      <p style={{fontFamily:B.body,fontSize:14,margin:'14px 0 0',color:B.smoke}}>$148</p>
+      <p style={{fontFamily:B.body,fontSize:14,lineHeight:1.75,color:B.smoke,margin:'32px 0 0',maxWidth:380}}>
+        A mat made from Portuguese cork, harvested without felling the tree. The bark regenerates over nine years. The mat ages with practice.
+      </p>
+      <div style={{marginTop:40}}>
+        <p style={{fontFamily:B.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:B.mist,margin:0}}>Length</p>
+        <div style={{display:'flex',gap:0,marginTop:14,borderTop:`1px solid ${B.ink}`}}>
+          {['68"','72"','78"'].map((s,i)=>(
+            <span key={i} style={{flex:1,padding:'14px 0',textAlign:'center',fontFamily:B.body,fontSize:12,letterSpacing:'.04em',background:i===1?B.ink:'transparent',color:i===1?B.bg:B.ink,borderBottom:`1px solid ${B.ink}`,borderRight:i<2?`1px solid ${B.ink}`:undefined}}>{s}</span>
+          ))}
+        </div>
+      </div>
+      <button style={{display:'block',width:'100%',padding:'18px 0',marginTop:48,background:'transparent',color:B.ink,fontFamily:B.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',border:`1px solid ${B.ink}`,cursor:'pointer'}}>Add to bag — $148</button>
+    </div>
+  </div>
+);
+
+/* ============ VARIANT C — Sakara / Warm ============ */
+const C = {
+  bg:'#FAF6EE', bone:'#F0E6D5', ink:'#2A2622', smoke:'#564E44', mist:'#9B8E7A',
+  terra:'#C97E5D', sage:'#94A892',
+  display:`'Lora',serif`, body:`'Inter',sans-serif`,
+};
+const VariantCHero = () => (
+  <div style={{position:'relative',width:'100%',height:880,overflow:'hidden',background:'#3a2a20'}}>
+    <div style={{position:'absolute',inset:0,...stripeWarm}}/>
+    <Grain/>
+    <div style={{position:'absolute',inset:0,padding:'36px 36px 48px',display:'flex',flexDirection:'column',justifyContent:'space-between',color:C.bg}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',fontFamily:C.body,fontSize:11,fontWeight:500,letterSpacing:'.05em',color:'rgba(250,246,238,.95)'}}>
+        <span>Shop · Rituals · Journal</span>
+        <span style={{fontFamily:C.display,fontStyle:'italic',fontSize:24,fontWeight:400,letterSpacing:'-.02em'}}>urban yogi</span>
+        <span>Bag (0)</span>
+      </div>
+      <div>
+        <span style={{display:'inline-block',padding:'8px 14px',background:C.terra,color:C.bg,fontFamily:C.body,fontSize:10,letterSpacing:'.18em',textTransform:'uppercase',fontWeight:500}}>Spring Edit · Now Live</span>
+        <h1 style={{fontFamily:C.display,fontStyle:'italic',fontSize:108,lineHeight:.95,letterSpacing:'-.02em',margin:'24px 0 0',fontWeight:400,maxWidth:'80%'}}>
+          A practice you<br/>actually return to.
+        </h1>
+        <p style={{fontFamily:C.body,fontSize:15,fontWeight:400,lineHeight:1.65,maxWidth:420,marginTop:28,opacity:.9}}>
+          Mats, recovery, tonics, and sleep — chosen with care, made for the way you really live.
+        </p>
+        <div style={{display:'flex',gap:14,marginTop:32}}>
+          <button style={{padding:'14px 28px',background:C.bg,color:C.ink,border:'none',fontFamily:C.body,fontSize:11,fontWeight:500,letterSpacing:'.18em',textTransform:'uppercase',cursor:'pointer'}}>Shop the edit</button>
+          <button style={{padding:'14px 28px',background:'transparent',color:C.bg,border:`1px solid rgba(250,246,238,.6)`,fontFamily:C.body,fontSize:11,fontWeight:500,letterSpacing:'.18em',textTransform:'uppercase',cursor:'pointer'}}>Read journal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+const VariantCTiles = () => (
+  <div style={{padding:'72px 36px',background:C.bg}}>
+    <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-end',marginBottom:36}}>
+      <div>
+        <p style={{fontFamily:C.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:C.terra,margin:0,fontWeight:600}}>Featured · Spring</p>
+        <h2 style={{fontFamily:C.display,fontStyle:'italic',fontSize:42,lineHeight:1,letterSpacing:'-.02em',margin:'12px 0 0',color:C.ink,fontWeight:400}}>The everyday edit.</h2>
+      </div>
+      <span style={{fontFamily:C.body,fontSize:12,fontWeight:500,color:C.terra,borderBottom:`1px solid ${C.terra}`,paddingBottom:3}}>See all →</span>
+    </div>
+    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:18,rowGap:32}}>
+      {[
+        {t:'The Cork Mat',p:'$148',tag:'New'},
+        {t:'Sleep Tonic',p:'$42',tag:'Bestseller'},
+        {t:'Cedar Diffuser',p:'$78'},
+        {t:'Linen Bolster',p:'$96'},
+      ].map((p,i)=>(
+        <div key={i}>
+          <div style={{position:'relative',aspectRatio:'4/5',background:C.bone,...stripeOchre,borderRadius:4,overflow:'hidden'}}>
+            <Grain/>
+            {p.tag && <span style={{position:'absolute',top:12,left:12,padding:'4px 10px',background:C.bg,color:C.ink,fontFamily:C.body,fontSize:9,letterSpacing:'.16em',textTransform:'uppercase',fontWeight:600,borderRadius:2}}>{p.tag}</span>}
+          </div>
+          <h3 style={{fontFamily:C.display,fontStyle:'italic',fontSize:22,letterSpacing:'-.01em',margin:'14px 0 4px',color:C.ink,fontWeight:400}}>{p.t}</h3>
+          <p style={{fontFamily:C.body,fontSize:13,fontWeight:500,color:C.smoke,margin:0}}>{p.p}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+const VariantCPdp = () => (
+  <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',background:C.bg,minHeight:780}}>
+    <div style={{position:'relative',background:C.bone,...stripeOchre}}>
+      <Grain/>
+      <span style={{position:'absolute',top:14,left:14,padding:'5px 10px',background:C.terra,color:C.bg,fontFamily:C.body,fontSize:9,letterSpacing:'.16em',textTransform:'uppercase',fontWeight:600}}>New Drop</span>
+    </div>
+    <div style={{padding:'56px 36px',color:C.ink}}>
+      <p style={{fontFamily:C.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:C.terra,margin:0,fontWeight:600}}>Mat · Made-to-order</p>
+      <h1 style={{fontFamily:C.display,fontStyle:'italic',fontSize:48,lineHeight:1.02,letterSpacing:'-.02em',margin:'14px 0 0',fontWeight:400}}>The Cork Mat</h1>
+      <div style={{display:'flex',alignItems:'center',gap:14,margin:'14px 0 0',fontFamily:C.body,fontSize:13}}>
+        <span style={{fontWeight:600}}>$148</span>
+        <span style={{color:C.sage,fontSize:11,fontWeight:500,letterSpacing:'.05em'}}>★ 4.9 (142)</span>
+      </div>
+      <p style={{fontFamily:C.body,fontSize:14.5,lineHeight:1.7,color:C.smoke,margin:'28px 0 0',maxWidth:400,fontWeight:400}}>
+        Portuguese cork, harvested without felling a tree. The mat that smells like the forest it came from — and grips better the more you sweat.
+      </p>
+      <div style={{marginTop:36}}>
+        <p style={{fontFamily:C.body,fontSize:11,letterSpacing:'.18em',textTransform:'uppercase',color:C.mist,margin:0,fontWeight:600}}>Length</p>
+        <div style={{display:'flex',gap:10,marginTop:14}}>
+          {['68"','72"','78"'].map((s,i)=>(
+            <span key={i} style={{padding:'10px 18px',fontFamily:C.body,fontSize:12,fontWeight:500,letterSpacing:'.04em',borderRadius:30,background:i===1?C.ink:'transparent',color:i===1?C.bg:C.ink,border:i!==1?`1px solid ${C.ink}`:'none'}}>{s}</span>
+          ))}
+        </div>
+      </div>
+      <button style={{display:'block',width:'100%',padding:'18px 0',marginTop:36,background:C.terra,color:C.bg,fontFamily:C.body,fontSize:12,fontWeight:600,letterSpacing:'.16em',textTransform:'uppercase',border:'none',borderRadius:2,cursor:'pointer'}}>Add to bag · $148</button>
+      <p style={{fontFamily:C.body,fontSize:11,color:C.sage,margin:'14px 0 0',textAlign:'center',fontWeight:500,letterSpacing:'.04em'}}>✺ Free shipping over $75 · 30-day returns</p>
+    </div>
+  </div>
+);
+
+/* ------------- Canvas ------------- */
+const ART_W = 760;
+function App(){
+  return (
+    <DCRootC title="Urban Yogi · Direction A / B / C" subtitle="Same surfaces, three feels. Pick a column.">
+      <DCSectionC id="hero" title="Homepage hero · the brand handshake">
+        <DCArtboardC id="A-hero" label="A · Cinematic Editorial" width={ART_W} height={880}><VariantAHero/></DCArtboardC>
+        <DCArtboardC id="B-hero" label="B · Aesop / Quiet" width={ART_W} height={880}><VariantBHero/></DCArtboardC>
+        <DCArtboardC id="C-hero" label="C · Sakara / Warm" width={ART_W} height={880}><VariantCHero/></DCArtboardC>
+      </DCSectionC>
+      <DCSectionC id="tiles" title="Edit grid · the merchandising rhythm">
+        <DCArtboardC id="A-tiles" label="A · asymmetric, mono labels" width={ART_W} height={920}><VariantATiles/></DCArtboardC>
+        <DCArtboardC id="B-tiles" label="B · uniform 2-up, museum" width={ART_W} height={920}><VariantBTiles/></DCArtboardC>
+        <DCArtboardC id="C-tiles" label="C · rounded, badged, friendly" width={ART_W} height={920}><VariantCTiles/></DCArtboardC>
+      </DCSectionC>
+      <DCSectionC id="pdp" title="PDP buy box · the conversion surface">
+        <DCArtboardC id="A-pdp" label="A · serif italic, hairline buttons" width={ART_W} height={780}><VariantAPdp/></DCArtboardC>
+        <DCArtboardC id="B-pdp" label="B · grid pickers, ghost CTA" width={ART_W} height={780}><VariantBPdp/></DCArtboardC>
+        <DCArtboardC id="C-pdp" label="C · pill pickers, terra CTA" width={ART_W} height={780}><VariantCPdp/></DCArtboardC>
+      </DCSectionC>
+    </DCRootC>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
