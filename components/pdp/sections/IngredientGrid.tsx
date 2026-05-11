@@ -12,14 +12,14 @@ type Props = {
 
 export function IngredientGrid({ title, sub, items }: Props) {
   return (
-    <section className="bg-paper">
+    <section className="bg-[var(--surface)]">
       <div className="mx-auto max-w-[1600px] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
         <div className="mb-14 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="max-w-2xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-editorial text-ink">
+          <h2 className="max-w-2xl font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-editorial text-[var(--text)]">
             {title ?? 'Built from the right things, in the right places.'}
           </h2>
           {sub ? (
-            <p className="max-w-md text-base leading-relaxed text-smoke">
+            <p className="max-w-md text-base leading-relaxed text-[var(--secondary)]">
               {sub}
             </p>
           ) : null}
@@ -31,7 +31,7 @@ export function IngredientGrid({ title, sub, items }: Props) {
               key={`${card.label}-${i}`}
               className="group flex flex-col"
             >
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-bone">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm bg-[var(--bg)]">
                 {card.image_url ? (
                   <img
                     src={card.image_url}
@@ -40,10 +40,10 @@ export function IngredientGrid({ title, sub, items }: Props) {
                   />
                 ) : null}
               </div>
-              <h3 className="mt-5 font-display text-xl tracking-editorial text-ink">
+              <h3 className="mt-5 font-display text-xl tracking-editorial text-[var(--text)]">
                 {card.label}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-smoke">
+              <p className="mt-2 text-sm leading-relaxed text-[var(--secondary)]">
                 {card.body}
               </p>
             </article>

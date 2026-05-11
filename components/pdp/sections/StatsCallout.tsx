@@ -10,10 +10,10 @@ type Props = {
 
 export function StatsCallout({ title, items }: Props) {
   return (
-    <section className="bg-cream">
+    <section className="bg-[var(--bg)]">
       <div className="mx-auto max-w-[1600px] px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
         {title ? (
-          <h2 className="mb-12 max-w-2xl font-display text-[clamp(1.8rem,3.4vw,3rem)] leading-[1.02] tracking-editorial text-ink">
+          <h2 className="mb-12 max-w-2xl font-display text-[clamp(1.8rem,3.4vw,3rem)] leading-[1.02] tracking-editorial text-[var(--text)]">
             {title}
           </h2>
         ) : null}
@@ -21,12 +21,12 @@ export function StatsCallout({ title, items }: Props) {
           {items.map((stat, i) => (
             <div
               key={`${stat.percent}-${i}`}
-              className="flex flex-col justify-between rounded-sm bg-accent p-8 text-cream sm:p-10 lg:min-h-[280px]"
+              className="flex flex-col justify-between rounded-sm bg-[var(--accent-dark)] p-8 text-[var(--bg)] sm:p-10 lg:min-h-[280px]"
             >
-              <span className="font-display text-[clamp(3rem,6vw,5.5rem)] leading-none tracking-editorial text-signal">
+              <span className="font-display text-[clamp(3rem,6vw,5.5rem)] leading-none tracking-editorial text-[var(--accent-signal)]">
                 {stat.percent}
               </span>
-              <p className="mt-8 text-sm leading-relaxed text-cream/80 sm:text-base">
+              <p className="mt-8 text-sm leading-relaxed text-[var(--bg)]/80 sm:text-base">
                 {stat.body}
               </p>
             </div>

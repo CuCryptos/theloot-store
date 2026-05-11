@@ -18,6 +18,7 @@ import type {
   StatCallout,
   Testimonial,
   FooterContent,
+  ProductPalette,
 } from './pdp-types'
 
 /** Metafields as returned by Shopify Storefront `metafields(identifiers:)`. */
@@ -37,6 +38,7 @@ export const PDP_METAFIELD_KEYS = [
   'stats',
   'testimonials',
   'footer',
+  'palette',
 ] as const
 
 export type PdpMetafieldKey = (typeof PDP_METAFIELD_KEYS)[number]
@@ -235,6 +237,54 @@ function defaultFooter(): FooterContent {
   }
 }
 
+/**
+ * Default palette = current Urban Yogi-inherited token values. Used as a
+ * fallback when a product has no `theloot.palette` metafield so the layout
+ * still renders coherently.
+ */
+export function defaultPalette(): ProductPalette {
+  return {
+    bg: '#F5F1EB',        // cream
+    surface: '#EFE9DD',   // bone / paper hybrid
+    text: '#1F1C18',      // ink
+    secondary: '#4A453E', // smoke
+    mist: '#A39C8E',      // mist
+    accentLabel: '#6F5E45', // clayDeep
+    accentDark: '#1F2A28',  // accent
+    accentSignal: '#7FA89A', // signal
+  }
+}
+
+/**
+ * Normalize a parsed palette JSON object. Accepts both camelCase
+ * (accentLabel) and snake_case (accent_label) keys so the Anthropic
+ * generator output and TypeScript clients both work.
+ */
+function normalizePalette(
+  raw: Record<string, unknown> | null,
+): ProductPalette | null {
+  if (!raw) return null
+  const pick = (a: string, b: string): string | undefined => {
+    const v = (raw[a] ?? raw[b]) as unknown
+    return typeof v === 'string' ? v : undefined
+  }
+  const bg = pick('bg', 'bg')
+  const surface = pick('surface', 'surface')
+  const text = pick('text', 'text')
+  const secondary = pick('secondary', 'secondary')
+  const mist = pick('mist', 'mist')
+  const accentLabel = pick('accentLabel', 'accent_label')
+  const accentDark = pick('accentDark', 'accent_dark')
+  const accentSignal = pick('accentSignal', 'accent_signal')
+  if (
+    !bg || !surface || !text || !secondary ||
+    !mist || !accentLabel || !accentDark || !accentSignal
+  ) {
+    return null
+  }
+  return { bg, surface, text, secondary, mist, accentLabel, accentDark, accentSignal }
+}
+
 /* ---------- parser ---------- */
 
 export function parseMetafieldsToContent(
@@ -252,6 +302,8 @@ export function parseMetafieldsToContent(
   const stats = safeJson<StatCallout[]>(mf.stats)
   const testimonials = safeJson<Testimonial[]>(mf.testimonials)
   const footer = safeJson<Partial<FooterContent>>(mf.footer)
+  const paletteRaw = safeJson<Record<string, unknown>>(mf.palette)
+  const palette = normalizePalette(paletteRaw) ?? defaultPalette()
 
   const heroDefaults = defaultHero(product)
 
@@ -274,5 +326,6 @@ export function parseMetafieldsToContent(
     testimonials:
       testimonials && testimonials.length ? testimonials : defaultTestimonials(),
     footer: { ...defaultFooter(), ...(footer || {}) },
+    palette,
   }
 }

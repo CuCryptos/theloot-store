@@ -92,6 +92,30 @@ export interface FooterContent {
   newsletter_label: string
 }
 
+/**
+ * Per-product color palette. Each PDP renders in its own native palette
+ * generated specifically for that product — making the LED face mask look
+ * clinical-cool, the slow feeder bowl look warm-oat, etc.
+ */
+export interface ProductPalette {
+  /** Page background — typically a warm or cool neutral that complements the product */
+  bg: string
+  /** Section/card surface — slightly different from bg, used for benefit cards and section dividers */
+  surface: string
+  /** Primary text color — typically near-black or near-white depending on bg */
+  text: string
+  /** Secondary text (kickers, body copy) */
+  secondary: string
+  /** Label/uppercase eyebrow text — usually a desaturated tint */
+  mist: string
+  /** Accent label text — used for italic 'em' emphasis in headlines */
+  accentLabel: string
+  /** Dark accent panel background — the DarkPanel section's bg */
+  accentDark: string
+  /** Signal/highlight color — small accents within dark sections, used sparingly */
+  accentSignal: string
+}
+
 /** Union of all section content for a single PDP. */
 export interface ProductPageContent {
   hero: HeroContent
@@ -103,4 +127,5 @@ export interface ProductPageContent {
   stats: StatCallout[]
   testimonials: Testimonial[]
   footer: FooterContent
+  palette: ProductPalette
 }

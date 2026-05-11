@@ -10,11 +10,11 @@ type Props = { content: FeatureSplitContent }
 export function FeatureSplit({ content }: Props) {
   const imageFirst = content.side === 'left'
   return (
-    <section className="bg-cream">
+    <section className="bg-[var(--bg)]">
       <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-stretch lg:grid-cols-2">
         {/* Image */}
         <div
-          className={`relative aspect-[4/5] w-full overflow-hidden bg-bone lg:aspect-auto lg:min-h-[80vh] ${
+          className={`relative aspect-[4/5] w-full overflow-hidden bg-[var(--surface)] lg:aspect-auto lg:min-h-[80vh] ${
             imageFirst ? 'lg:order-1' : 'lg:order-2'
           }`}
         >
@@ -35,34 +35,34 @@ export function FeatureSplit({ content }: Props) {
         >
           <div className="max-w-xl">
             {content.kicker ? (
-              <span className="block text-[11px] uppercase tracking-[0.24em] text-clay">
+              <span className="block text-[11px] uppercase tracking-[0.24em] text-[var(--accent-label)]">
                 {content.kicker}
               </span>
             ) : null}
-            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-editorial text-ink">
+            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.4rem)] leading-[1.02] tracking-editorial text-[var(--text)]">
               {content.headline}
             </h2>
-            <p className="mt-6 text-base leading-relaxed text-smoke sm:text-lg">
+            <p className="mt-6 text-base leading-relaxed text-[var(--secondary)] sm:text-lg">
               {content.body}
             </p>
 
             {content.accordion?.length ? (
-              <div className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+              <div className="mt-10 divide-y divide-[var(--text)]/10 border-y border-[var(--text)]/10">
                 {content.accordion.map((row) => (
                   <details
                     key={row.q}
                     className="group py-4 [&_summary::-webkit-details-marker]:hidden"
                   >
-                    <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-medium text-ink">
+                    <summary className="flex cursor-pointer list-none items-center justify-between text-sm font-medium text-[var(--text)]">
                       <span>{row.q}</span>
                       <span
                         aria-hidden
-                        className="text-clay transition group-open:rotate-45"
+                        className="text-[var(--accent-label)] transition group-open:rotate-45"
                       >
                         +
                       </span>
                     </summary>
-                    <p className="mt-3 text-sm leading-relaxed text-smoke">
+                    <p className="mt-3 text-sm leading-relaxed text-[var(--secondary)]">
                       {row.a}
                     </p>
                   </details>
