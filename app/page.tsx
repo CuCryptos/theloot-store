@@ -9,7 +9,14 @@ import { getFeaturedProducts } from '@/lib/shopify'
 export const revalidate = 60
 
 export default async function HomePage() {
-  const featured = (await getFeaturedProducts()).slice(0, 4)
+  // Defensive: if Shopify Storefront API times out at build/SSR, fall back to
+  // empty grid so the page still renders. ISR will repopulate on next request.
+  let featured: Awaited<ReturnType<typeof getFeaturedProducts>> = []
+  try {
+    featured = (await getFeaturedProducts()).slice(0, 4)
+  } catch (err) {
+    console.error('[HomePage] getFeaturedProducts failed, rendering empty edit:', err)
+  }
   return (
     <>
       <Navbar />

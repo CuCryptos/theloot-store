@@ -16,7 +16,14 @@ export const metadata: Metadata = {
 }
 
 export default async function ShopPage() {
-  const products = await getAllProducts(50)
+  // Defensive: if Shopify Storefront API is slow at build/SSR, fall back to
+  // empty list so the page still renders. ISR repopulates on next request.
+  let products: Awaited<ReturnType<typeof getAllProducts>> = []
+  try {
+    products = await getAllProducts(50)
+  } catch (err) {
+    console.error('[ShopPage] getAllProducts failed, rendering empty edit:', err)
+  }
 
   return (
     <>
