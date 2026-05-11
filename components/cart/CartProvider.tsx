@@ -75,6 +75,14 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       close: () => setOpen(false),
       add: async (variantId, quantity = 1) => {
         await mutate('add', { variantId, quantity })
+        // Meta Pixel: fire AddToCart (no-ops if Pixel not loaded)
+        if (typeof window !== 'undefined' && (window as unknown as { fbq?: (...args: unknown[]) => void }).fbq) {
+          ;(window as unknown as { fbq: (...args: unknown[]) => void }).fbq(
+            'track',
+            'AddToCart',
+            { content_ids: [variantId], content_type: 'product', num_items: quantity }
+          )
+        }
         setOpen(true)
       },
       update: (lineId, quantity) => mutate('update', { lineId, quantity }),

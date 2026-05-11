@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import { fraunces, inter } from './fonts'
 import './globals.css'
 import { CartProvider } from '@/components/cart/CartProvider'
+import { MetaPixel } from '@/components/analytics/MetaPixel'
 
 export const metadata: Metadata = {
-  title: 'theloot — A quieter way to shop trending.',
+  title: 'theloot — The trending products worth knowing about.',
   description:
-    'Yoga, recovery, and small rituals for an unhurried life.',
+    'A curated edit of the trending products worth knowing about — one drop every Tuesday.',
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
   ),
@@ -24,6 +25,7 @@ export default function RootLayout({
     >
       <body>
         <CartProvider>{children}</CartProvider>
+        <MetaPixel />
       </body>
     </html>
   )
