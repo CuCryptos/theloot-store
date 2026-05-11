@@ -21,6 +21,10 @@ const config: Config = {
         // The single accent — a warm taupe, never saturated
         clay:     '#9C8869', // for hover states, underlines, the rare flourish
         clayDeep: '#6F5E45',
+        // 2.AG-tier dark editorial accents
+        accent:      '#1F2A28',
+        accentLight: '#2D3F3A',
+        signal:      '#7FA89A',
       },
       fontFamily: {
         display: ['var(--font-fraunces)', 'Georgia', 'serif'],

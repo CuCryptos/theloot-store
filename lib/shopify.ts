@@ -11,6 +11,12 @@ import type {
   ShopifyCart,
   ProductMetafields,
 } from './shopify-types'
+import {
+  parseMetafieldsToContent,
+  PDP_METAFIELD_KEYS,
+  type StorefrontMetafield,
+} from './pdp-content'
+import type { ProductPageContent } from './pdp-types'
 
 const domain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!
 const storefrontToken = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN!
@@ -128,6 +134,55 @@ export async function getProductByHandle(handle: string) {
     reviewSummary: p.reviewSummary ? JSON.parse(p.reviewSummary.value) : undefined,
   }
   return { product: p as ShopifyProduct, meta }
+}
+
+/**
+ * 2.AG-tier PDP — pull theloot metafields + parse to ProductPageContent.
+ * Returns null when product not found. Gracefully degrades when metafields
+ * are missing (the adapter fills in product-derived defaults).
+ */
+export async function getProductPageContent(
+  handle: string,
+): Promise<{ product: ShopifyProduct; content: ProductPageContent } | null> {
+  const identifiers = PDP_METAFIELD_KEYS.map(
+    (k) => `{namespace: "theloot", key: "${k}"}`,
+  ).join(', ')
+  const data = await shopifyFetch<{
+    productByHandle:
+      | (ShopifyProduct & {
+          metafields: StorefrontMetafield[]
+        })
+      | null
+  }>({
+    query: `
+      query ProductPageContent($handle: String!) {
+        productByHandle(handle: $handle) {
+          id handle title description productType tags
+          priceRange { minVariantPrice { amount currencyCode } }
+          images(first: 12) { edges { node { url altText width height } } }
+          variants(first: 50) {
+            edges { node {
+              id title availableForSale
+              price { amount currencyCode }
+              selectedOptions { name value }
+              image { url altText width height }
+            } }
+          }
+          metafields(identifiers: [${identifiers}]) {
+            namespace key value
+          }
+        }
+      }
+    `,
+    variables: { handle },
+  })
+  if (!data.productByHandle) return null
+  const { metafields, ...product } = data.productByHandle
+  const content = parseMetafieldsToContent(
+    product as ShopifyProduct,
+    metafields,
+  )
+  return { product: product as ShopifyProduct, content }
 }
 
 export async function getCollectionByHandle(handle: string) {
