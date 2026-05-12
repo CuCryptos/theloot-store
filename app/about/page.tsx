@@ -9,6 +9,14 @@ export const metadata = {
   title: 'About — theloot',
   description:
     'An independent edit of the trending products worth knowing about. One drop, every Tuesday.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About — theloot',
+    description:
+      'An independent edit of the trending products worth knowing about. One drop, every Tuesday.',
+    url: '/about',
+    images: ['/images/editorial/hero-edition-01.png'],
+  },
 }
 
 const RULES = [

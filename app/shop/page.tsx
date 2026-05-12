@@ -13,6 +13,21 @@ export const metadata: Metadata = {
   title: 'Shop — theloot',
   description:
     'The full edit. Trending products picked for design, function, and price — one drop every Tuesday.',
+  alternates: { canonical: '/shop' },
+  openGraph: {
+    title: 'Shop — theloot',
+    description:
+      'The full edit. Trending products picked for design, function, and price — one drop every Tuesday.',
+    url: '/shop',
+    images: ['/images/editorial/hero-edition-01.png'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shop — theloot',
+    description:
+      'The full edit. Trending products picked for design, function, and price — one drop every Tuesday.',
+    images: ['/images/editorial/hero-edition-01.png'],
+  },
 }
 
 export default async function ShopPage() {
