@@ -1,7 +1,8 @@
 export const SITE = {
   name: 'theloot',
   tagline: 'The trending products worth knowing about.',
-  email: 'studio@theloot.co',
+  email: 'hello@theloot.co',
+  editorialEmail: 'studio@theloot.co',
   social: {
     instagram: 'theloot.co',
   },
