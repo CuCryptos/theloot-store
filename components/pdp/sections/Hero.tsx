@@ -6,6 +6,7 @@
  */
 import type { HeroContent } from '@/lib/pdp-types'
 import type { ShopifyProduct } from '@/lib/shopify-types'
+import { AddToBagButton } from '@/components/pdp/AddToBagButton'
 
 type Props = {
   hero: HeroContent
@@ -14,6 +15,8 @@ type Props = {
 
 export function Hero({ hero, product }: Props) {
   const price = product.priceRange.minVariantPrice
+  const firstVariant = product.variants.edges[0]?.node
+  const isInStock = firstVariant?.availableForSale ?? false
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-[var(--bg)]">
       <div className="grid min-h-[100svh] grid-cols-1 lg:grid-cols-12">
@@ -45,10 +48,11 @@ export function Hero({ hero, product }: Props) {
               {hero.tagline}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-6">
-              <button className="group inline-flex items-center gap-3 rounded-full bg-[var(--text)] px-7 py-3.5 text-sm font-medium text-[var(--bg)] transition hover:bg-[var(--accent-label)]">
-                {hero.cta ?? 'Add to bag'}
-                <span aria-hidden className="transition group-hover:translate-x-0.5">→</span>
-              </button>
+              <AddToBagButton
+                variantId={firstVariant?.id}
+                label={hero.cta ?? 'Add to bag'}
+                disabled={!isInStock}
+              />
               <span className="text-sm text-[var(--secondary)]">
                 ${parseFloat(price.amount).toFixed(0)} {price.currencyCode}
               </span>
