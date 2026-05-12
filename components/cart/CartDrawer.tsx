@@ -34,9 +34,11 @@ export function CartDrawer() {
 
         <div className="px-6 pt-4 pb-3">
           {remaining > 0 ? (
-            <p className="text-sm text-smoke">${remaining.toFixed(0)} from complimentary shipping</p>
+            <p className="text-sm text-smoke">
+              ${remaining.toFixed(0)} away from free shipping
+            </p>
           ) : (
-            <p className="text-sm text-clayDeep">Complimentary shipping unlocked</p>
+            <p className="text-sm text-clayDeep">Free shipping unlocked</p>
           )}
           <div className="mt-2 h-px bg-ink/10">
             <div className="h-px bg-clay transition-all duration-500" style={{ width: `${progress}%` }} />
