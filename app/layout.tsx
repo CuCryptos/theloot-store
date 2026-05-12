@@ -3,6 +3,7 @@ import { fraunces, inter } from './fonts'
 import './globals.css'
 import { CartProvider } from '@/components/cart/CartProvider'
 import { MetaPixel } from '@/components/analytics/MetaPixel'
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics'
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/seo/JsonLd'
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
@@ -91,6 +92,7 @@ export default function RootLayout({
       <body>
         <CartProvider>{children}</CartProvider>
         <MetaPixel />
+        <GoogleAnalytics />
       </body>
     </html>
   )
